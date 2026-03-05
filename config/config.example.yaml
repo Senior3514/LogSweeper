@@ -1,0 +1,33 @@
+logsweeper:
+  host: "0.0.0.0"
+  port: 8080
+  log_level: "INFO"
+
+storage:
+  driver: "sqlite"
+  sqlite_path: "logsweeper.db"
+  # postgres_dsn: "postgresql://user:pass@localhost:5432/logsweeper"
+
+ingestion:
+  watch_paths:
+    - "/var/log/syslog"
+  syslog:
+    enabled: false
+    port: 1514
+  http_pull:
+    enabled: false
+    endpoints: []
+
+parsers:
+  builtin:
+    - json
+    - syslog
+    - csv
+  custom_dir: "config/parsers/"
+
+security:
+  csrf_enabled: true
+  secure_cookies: true
+  rbac_enabled: true
+  allowed_origins:
+    - "http://localhost:3000"
