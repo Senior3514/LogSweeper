@@ -29,7 +29,7 @@ python -m src.logsweeper.app &
 SERVER_PID=$!
 sleep 2
 
-if curl -sf http://localhost:8080/healthz > /dev/null 2>&1; then
+if curl -sf http://localhost:8093/healthz > /dev/null 2>&1; then
     echo "  Health check PASSED"
 else
     echo "  Health check FAILED"
@@ -43,7 +43,7 @@ echo "[5/6] Docker deploy..."
 if command -v docker-compose &> /dev/null || command -v docker &> /dev/null; then
     docker-compose up -d --build || echo "  Docker deploy skipped (build failed or not available)"
     sleep 3
-    if curl -sf http://localhost:8080/healthz > /dev/null 2>&1; then
+    if curl -sf http://localhost:8093/healthz > /dev/null 2>&1; then
         echo "  Docker health check PASSED"
     else
         echo "  Docker health check skipped"
@@ -60,6 +60,6 @@ echo "  docker-compose down"
 echo "  git revert HEAD"
 echo ""
 echo "=== Endpoints ==="
-echo "  API:  http://localhost:8080"
+echo "  API:  http://localhost:8093"
 echo "  UI:   http://localhost:3000"
-echo "  Health: http://localhost:8080/healthz"
+echo "  Health: http://localhost:8093/healthz"

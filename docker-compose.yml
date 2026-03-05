@@ -7,7 +7,7 @@ services:
       target: backend
     container_name: logsweeper-api
     ports:
-      - "8080:8080"
+      - "8093:8093"
     volumes:
       - ./data:/app/data
     environment:
@@ -15,7 +15,7 @@ services:
       - LOGSWEEPER_SECRET_KEY=${LOGSWEEPER_SECRET_KEY:-change-me-in-production}
       - LOGSWEEPER_LOG_LEVEL=INFO
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      test: ["CMD", "curl", "-f", "http://localhost:8093/healthz"]
       interval: 10s
       timeout: 5s
       retries: 3

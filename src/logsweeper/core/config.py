@@ -13,7 +13,7 @@ def load_config(config_path: str | None = None) -> dict:
     """Load configuration from YAML file with env overrides."""
     defaults = {
         "host": "0.0.0.0",
-        "port": 8080,
+        "port": 8093,
         "log_level": "INFO",
         "db_path": "logsweeper.db",
         "secret_key": "change-me-in-production",

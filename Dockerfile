@@ -7,8 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/logsweeper/ ./logsweeper/
 COPY config/ ./config/
 
-EXPOSE 8080
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "logsweeper.app:app"]
+EXPOSE 8093
+CMD ["gunicorn", "--bind", "0.0.0.0:8093", "--workers", "2", "logsweeper.app:app"]
 
 # ---
 

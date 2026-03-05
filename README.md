@@ -43,7 +43,7 @@ npm run dev
 
 ```bash
 docker-compose up -d --build
-# API: http://localhost:8080
+# API: http://localhost:8093
 # UI:  http://localhost:3000
 ```
 
@@ -81,12 +81,12 @@ cd src/ui && npm test
 
 ```bash
 # Ingest raw lines
-curl -X POST http://localhost:8080/api/ingest \
+curl -X POST http://localhost:8093/api/ingest \
   -H 'Content-Type: application/json' \
   -d '{"source": "myapp", "lines": ["{\"message\":\"hello\"}", "raw log line"]}'
 
 # Ingest from file
-curl -X POST http://localhost:8080/api/ingest \
+curl -X POST http://localhost:8093/api/ingest \
   -H 'Content-Type: application/json' \
   -d '{"source": "syslog", "file": "/var/log/syslog"}'
 ```

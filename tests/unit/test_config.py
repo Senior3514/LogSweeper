@@ -8,7 +8,7 @@ from src.logsweeper.core.config import load_config
 
 def test_default_config():
     config = load_config()
-    assert config["port"] == 8080
+    assert config["port"] == 8093
     assert config["host"] == "0.0.0.0"
     assert config["db_path"] is not None
 
