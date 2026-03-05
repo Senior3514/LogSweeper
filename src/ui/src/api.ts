@@ -18,6 +18,14 @@ export interface EventsResponse {
   offset: number;
 }
 
+export interface StatsResponse {
+  total_events: number;
+  source_count: number;
+  category_count: number;
+  sources: string[];
+  categories: string[];
+}
+
 export async function fetchEvents(params: {
   source?: string;
   category?: string;
@@ -56,8 +64,24 @@ export async function fetchCategories(): Promise<string[]> {
   return data.categories;
 }
 
+export async function fetchStats(): Promise<StatsResponse> {
+  const res = await fetch(`${BASE}/api/stats`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
 export async function checkHealth(): Promise<{ status: string; version: string }> {
   const res = await fetch(`${BASE}/healthz`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+export async function ingestLines(source: string, lines: string[]): Promise<{ status: string; count: number }> {
+  const res = await fetch(`${BASE}/api/ingest`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ source, lines }),
+  });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
