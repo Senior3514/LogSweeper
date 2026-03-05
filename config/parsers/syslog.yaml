@@ -1,0 +1,14 @@
+name: syslog
+description: "Standard syslog format parser"
+pattern: '^(?P<timestamp>\w{3}\s+\d+\s+\d{2}:\d{2}:\d{2})\s+(?P<hostname>\S+)\s+(?P<process>\S+?)(?:\[(?P<pid>\d+)\])?\s*:\s*(?P<message>.*)$'
+fields:
+  - name: timestamp
+    type: string
+  - name: hostname
+    type: string
+  - name: process
+    type: string
+  - name: pid
+    type: string
+  - name: message
+    type: string

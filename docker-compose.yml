@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: .
+      target: backend
+    container_name: logsweeper-api
+    ports:
+      - "8093:8093"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - LOGSWEEPER_DB_PATH=/app/data/logsweeper.db
+      - LOGSWEEPER_SECRET_KEY=${LOGSWEEPER_SECRET_KEY:-change-me-in-production}
+      - LOGSWEEPER_LOG_LEVEL=INFO
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8093/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  ui:
+    build:
+      context: .
+      target: ui
+    container_name: logsweeper-ui
+    ports:
+      - "3000:80"
+    depends_on:
+      api:
+        condition: service_healthy
